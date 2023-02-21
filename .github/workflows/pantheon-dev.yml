@@ -29,20 +29,15 @@ jobs:
           git config --global user.email "trongkhanh2014@gmail.com"
           git config --global user.name "khanh.dt"
           commit_message=$(git log -1 --pretty=%B)
-          rm -rf .git
-          rm -rf .github
-          rm -rf scripts
-          rm -rf web/core/*.txt
-          git init
           git config --local gc.auto 0
           git config pull.rebase false
-          git add --force .
+          git add .
           git commit -m "Automated deploy: $commit_message" >/dev/null
           
       - name: Push code to Pantheon Dev
         run: |
           git remote add patheon ${{ secrets.PANTHEON_REPO }}
-          git push --force patheon HEAD:master
+          git push patheon master
       # There is no easy way to know when the code has actually synced to the Pantheon environment so we can't reliably
       # run Drush commands immediately after pushing code. Thus, we run database updates, import config, and disable
       # maintenance mode using Pantheon's Quicksilver scripting (see web/private/quicksilver/sync_code.php referenced by
