@@ -35,6 +35,7 @@ jobs:
           rm -rf web/core/*.txt
           git init
           git config --local gc.auto 0
+          git config pull.rebase false
           git add --force .
           git commit -m "Automated deploy: $commit_message" >/dev/null
           
