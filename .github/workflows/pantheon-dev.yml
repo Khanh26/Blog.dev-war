@@ -39,6 +39,7 @@ jobs:
         run: |
           git remote add patheon ${{ secrets.PANTHEON_REPO }}
           git pull patheon master
+          git rebase --continue
           git push patheon master
       # There is no easy way to know when the code has actually synced to the Pantheon environment so we can't reliably
       # run Drush commands immediately after pushing code. Thus, we run database updates, import config, and disable
