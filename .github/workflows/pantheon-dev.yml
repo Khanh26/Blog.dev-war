@@ -32,7 +32,6 @@ jobs:
           rm -rf .git
           git init
           git config pull.rebase true
-          git config merge.pin.driver true
           git add .
           git commit -m "Automated deploy: $commit_message" >/dev/null
           
