@@ -41,7 +41,7 @@ jobs:
       - name: Push code to Pantheon Dev
         run: |
           git remote add patheon ${{ secrets.PANTHEON_REPO }}
-          git push --set-upstream patheon master
+          git push --force patheon HEAD:master
       # There is no easy way to know when the code has actually synced to the Pantheon environment so we can't reliably
       # run Drush commands immediately after pushing code. Thus, we run database updates, import config, and disable
       # maintenance mode using Pantheon's Quicksilver scripting (see web/private/quicksilver/sync_code.php referenced by
