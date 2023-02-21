@@ -17,6 +17,33 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          php-version: ${{ env.php_version }}
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Get Composer cache directory
+        id: composer-cache-dir
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@2
+        with:
+          path: ${{ steps.composer-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - name: Avoid GitHub rate limit for Composer
+        run: composer config -g github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Composer install
+        run: composer install --no-dev --no-interaction --no-progress
 
       - name: Place SSH key
         uses: shimataro/ssh-key-action@v2 # v2.1.0
@@ -27,7 +54,7 @@ jobs:
       - name: Prepare code for deployment
         run: |
           git config --global user.email "trongkhanh2014@gmail.com"
-          git config --global user.name "khanh.dt"
+          git config --global user.name "Github actions"
           commit_message=$(git log -1 --pretty=%B)
           rm -rf .git
           git init
