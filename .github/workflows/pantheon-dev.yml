@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
       - name: Place SSH key
         uses: shimataro/ssh-key-action@v2 # v2.1.0
         with:
@@ -27,7 +27,7 @@ jobs:
       - name: Prepare code for deployment
         run: |
           git config --global user.email "trongkhanh2014@gmail.com"
-          git config --global user.name "Github actions"
+          git config --global user.name "khanh.dt"
           commit_message=$(git log -1 --pretty=%B)
           rm -rf .git
           git init
@@ -39,7 +39,6 @@ jobs:
         run: |
           git remote add patheon ${{ secrets.PANTHEON_REPO }}
           git pull patheon master
-          git rebase --continue
           git push patheon master
       # There is no easy way to know when the code has actually synced to the Pantheon environment so we can't reliably
       # run Drush commands immediately after pushing code. Thus, we run database updates, import config, and disable
