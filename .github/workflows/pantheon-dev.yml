@@ -31,7 +31,7 @@ jobs:
           commit_message=$(git log -1 --pretty=%B)
           rm -rf .git
           git init
-          git config pull.rebase true
+          git config pull.rebase false
           git add .
           git commit -m "Automated deploy: $commit_message" >/dev/null
           
