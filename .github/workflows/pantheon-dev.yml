@@ -28,9 +28,11 @@ jobs:
         run: |
           git config --global user.email "trongkhanh2014@gmail.com"
           git config --global user.name "khanh.dt"
+          git config pull.rebase false
           commit_message=$(git log -1 --pretty=%B)
           rm -rf .git
           git init
+          git
           git add .
           git commit -m "Automated deploy: $commit_message" >/dev/null
           
