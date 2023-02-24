@@ -1,0 +1,9 @@
+dashboard_expand.admin:
+  path: '/admin/dashboard'
+  defaults:
+    _title: 'Dashboard'
+    _controller: \Drupal\dashboard_expand\Controller\dashboardExpandController::content
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: true
