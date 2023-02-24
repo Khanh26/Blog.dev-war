@@ -1,0 +1,6 @@
+dashboard_expand.admin:
+  title: 'Dashboard'
+  parent: system.admin
+  description: 'Dashboard menu'
+  route_name: dashboard_expand.admin
+  weight: -99
