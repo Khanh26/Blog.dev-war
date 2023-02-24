@@ -1,0 +1,12 @@
+name: Dev war
+type: theme
+core_version_requirement: "^8 || ^9"
+version: VERSION
+base theme: classy
+libraries:
+  - dev_war/global
+regions:
+  header: "Header"
+  breadcrumb: "Breadcrumb"
+  content: "Content"
+  footer: "Footer"

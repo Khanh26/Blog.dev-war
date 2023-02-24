@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ * @param $form
+ *
+ * @return void
+ */
+function dev_war_form_system_theme_settings_alter(&$form):void {
+  $form['theme_advanced_settings'] = [
+    '#type' => 'details',
+    '#title' => t('Advanced settings'),
+    '#open' => FALSE,
+  ];
+  $form['theme_advanced_settings']['show_toolbar_frontend'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Show Toolbar in Frontend'),
+    '#default_value' => theme_get_setting('show_toolbar_frontend'),
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * @param $variables
+ *
+ * @return void
+ */
+function dev_war_preprocess_toolbar(&$variables):void {
+  $variables['show_toolbar_frontend'] = theme_get_setting('show_toolbar_frontend') ?: 0;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function dev_war_theme_suggestions_toolbar_alter(array &$suggestions, array $variables):array {
+  $suggestions = [];
+  $suggestions[] = "toolbar__" . \Drupal::service('theme.manager')->getActiveTheme()->getName();
+  return $suggestions;
+}
+
+/**
+ * @param $variables
+ * Implements hook_preprocess_HOOK().
+ * @return void
+ */
+function dev_war_preprocess_html(&$variables):void {
+  $name_theme = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+  $variables['attributes'] = [];
+  $variables['attributes']['data-name-theme'] = $name_theme;
+  $variables['attributes']['class'][]= 'theme--'.$name_theme;
+  $variables['attributes']['class'][]= 'body--front-end';
+}
