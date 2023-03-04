@@ -1,0 +1,9 @@
+home_expand.admin:
+  path: '/admin/edit/home-page'
+  defaults:
+    _title: 'Edit home page'
+    _controller: \Drupal\home_expand\Controller\ConfigHomePageController::isNodeHomePage
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: true
