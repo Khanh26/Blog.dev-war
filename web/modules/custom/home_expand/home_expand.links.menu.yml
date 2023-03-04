@@ -1,0 +1,6 @@
+home_expand.admin:
+  title: 'Edit home page'
+  parent: system.admin
+  description: 'Edit home page'
+  route_name: home_expand.admin
+  weight: -98

@@ -1,0 +1,15 @@
+<?php
+
+use Drupal\home_expand\Constants\HomeExpandConstants;
+
+/**
+ * Implements hook_node_delete().
+ */
+function home_expand_node_delete($node) {
+  if ($node->getType() == HomeExpandConstants::Type) {
+    \Drupal::service('config.factory')
+      ->getEditable('system.site')
+      ->set('page.front', $path ?? '/user')
+      ->save();
+  }
+}

@@ -6,5 +6,3 @@ description: Provide menu and content Dashboard
 core_version_requirement: '^9.3 || ^10'
 libraries:
   - dashborad_expand/global
-dependencies:
-  - gin_toolbar
