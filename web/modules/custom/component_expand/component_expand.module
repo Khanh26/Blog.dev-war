@@ -1,0 +1,42 @@
+<?php
+
+use Drupal\component_expand\Constants\ComponentExpandConstants;
+
+/**
+ * Implements hook_theme().
+ */
+function component_expand_theme($existing, $type, $theme, $path) {
+  $components = ComponentExpandConstants::components;
+  $component_theme = [];
+  foreach ($components as $component) {
+    $component_theme['component__' . $component] = [
+      'base hook' => 'paragraph',
+      'template' => 'components/component--' . $component,
+    ];
+  }
+  return $component_theme;
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function component_expand_page_attachments(array &$attachments) {
+  $libraries = [
+    'global.component_expand',
+    'banner.component_expand',
+    'button.component_expand',
+  ];
+  foreach ($libraries as $library) {
+    $attachments['#attached']['library'][] = 'component_expand/' . $library;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function component_expand_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'paragraph') {
+    $paragraph = $variables['elements']['#paragraph'];
+    $suggestions[] = 'component__' . $paragraph->bundle();
+  }
+}

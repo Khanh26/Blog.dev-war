@@ -1,0 +1,5 @@
+name: Component expand
+type: module
+description: Custom components of Paragraph
+core_version_requirement: '^9.3 || ^10'
+package: Custom
