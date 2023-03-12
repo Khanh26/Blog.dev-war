@@ -29,4 +29,5 @@ class ConfigHomePageController extends ControllerBase {
     $url = Url::fromRoute('entity.node.edit_form', ['node' => $nid]);
     return new RedirectResponse($url->toString());
   }
+
 }

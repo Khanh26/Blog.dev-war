@@ -1,7 +1,7 @@
 name: Home page expand
 type: module
 version: VERSION
-package: custom
+package: Custom
 description: Provide menu and home page type
 core_version_requirement: '^9.3 || ^10'
 libraries:

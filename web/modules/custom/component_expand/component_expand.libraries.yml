@@ -1,0 +1,12 @@
+global.component_expand:
+  css:
+    theme:
+      assets/css/common.css: {}
+banner.component_expand:
+  css:
+    theme:
+      assets/css/banner.css: {}
+button.component_expand:
+  css:
+    theme:
+      assets/css/button.css: {}
